@@ -8,7 +8,7 @@ const tweetSchema = new mongoose.Schema({
     description: {
         type: String,
         required: true,
-        max: 100,
+        max: 200,
     },
     },
     { timestamps: true });
