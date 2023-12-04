@@ -2,8 +2,11 @@ import React from 'react';
 import LeftSidebar from '../components/LeftSidebar';
 import RightSidebar from '../components/RightSidebar';
 import MainTweet from '../components/MainTweet';
+//import { useUser } from "../context/UserContext";
 
 const Home = () => {
+
+
   return (
     <div className="grid grid-cols-1 md:grid-cols-4">
       <div className="px-6">

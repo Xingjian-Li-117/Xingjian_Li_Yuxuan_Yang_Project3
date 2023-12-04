@@ -8,7 +8,6 @@ import Error from './pages/Error';
 import Navbar from './components/Navbar';
 
 
-
 const Layout = () => {
   return (
     <div className="md:w-9/12 mx-auto">
@@ -48,6 +47,7 @@ function App() {
   return (
     <div>
       <RouterProvider router={router}></RouterProvider>
+    
     </div>
   );
 }

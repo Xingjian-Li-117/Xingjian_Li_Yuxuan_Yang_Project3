@@ -6,14 +6,14 @@ const Error = () => {
     <div className="text-center my-8 space-y-5">
       <h2 className="font-bold text-4xl">Error, page not found</h2>
       <p className="pb-2">
-        Please go back to login <br />
+        Please go back to home <br />
       </p>
 
       <Link
-        to="/signin"
+        to="/"
         className="bg-blue-500 py-1 px-3 rounded-full text-white"
       >
-        Login
+        Home
       </Link>
     </div>
   );

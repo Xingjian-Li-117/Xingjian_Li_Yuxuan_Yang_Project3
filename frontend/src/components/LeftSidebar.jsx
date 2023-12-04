@@ -2,8 +2,10 @@ import React from 'react'
 import { Link } from "react-router-dom";
 import HomeIcon from "@mui/icons-material/Home";
 import PersonIcon from "@mui/icons-material/Person";
+import { useUser } from "../context/UserContext";
 
 const LeftSideBar = () => {
+  const { currentUser, logout } = useUser();
   return (
     <div className="flex flex-col h-full md:h-[90vh] justify-between mr-6">
         <div className="mt-6 flex flex-col space-y-4">
@@ -21,18 +23,26 @@ const LeftSideBar = () => {
             </Link>
         </div>
         <div className="flex mt-auto justify-between mb-6"> 
-          <div>
-            <p className="font-bold">Username</p>
-            <p className="font-bold">@Username</p>
-          </div>
-          <div>
-            <Link to="login">
-              <button className="bg-red-500 px-4 py-2 text-white rounded-full">
+        {currentUser ? (
+          <>
+            <div>
+              <p className="font-bold">{currentUser.username}</p> {/* 显示用户名 */}
+              <p className="font-bold">@{currentUser.username}</p>
+            </div>
+            <div>
+              <button onClick={logout} className="bg-red-500 px-4 py-2 text-white rounded-full">
                 Logout
               </button>
-            </Link>
-          </div>
-        </div>
+            </div>
+          </>
+        ) : (
+          <Link to="/login">
+            <button className="bg-blue-500 px-4 py-2 text-white rounded-full">
+              Login/Register
+            </button>
+          </Link>
+        )}
+      </div>
     </div>
   )
 }
