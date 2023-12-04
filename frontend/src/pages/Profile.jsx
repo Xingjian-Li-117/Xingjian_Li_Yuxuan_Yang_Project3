@@ -30,6 +30,11 @@ const Profile = () => {
     fetchData();
   }, [currentUser, id]);
 
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    return date.toLocaleDateString("en-US", { year: 'numeric', month: 'long', day: 'numeric' });
+  };
+
   return (
     <>
       <div className="grid grid-cols-1 md:grid-cols-4">
@@ -45,6 +50,13 @@ const Profile = () => {
                 Edit Profile
               </button>
             )}
+            {userProfile && (
+              <div className="text-sm text-gray-500">
+                Joined: {formatDate(userProfile.createdAt)}
+              </div>
+            )}
+
+
           </div>
           <div className="mt-6">
               {userTweets &&
