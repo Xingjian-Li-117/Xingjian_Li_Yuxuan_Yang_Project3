@@ -1,8 +1,14 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { useLocation } from "react-router-dom";
 import StarBorderPurple500Icon from "@mui/icons-material/StarBorderPurple500";
 import SearchIcon from "@mui/icons-material/Search";
 
+import UserPlaceholder from "./UserPlaceholder";
+
+
 const Navbar = () => {
+  const [userData, setUserData] = useState(null);
+  const location = useLocation().pathname;
   return (
     <div className="grid grid-cols-1 md:grid-cols-4 my-5 justify-center">
       <div className="mx-auto md:mx-0">
@@ -17,7 +23,11 @@ const Navbar = () => {
       <div className="col-span-2 md:border-x-2 md:border-slate-200 md:px-6 my-6 md:my-0">
         <div className="flex justify-between items-center">
           <h2 className="font-bold text-2xl">
-            Home
+            {location.includes("profile") ? (
+              <UserPlaceholder setUserData={setUserData} userData={userData} />
+            ): (
+              "Home"
+            )}
           </h2>
           <StarBorderPurple500Icon />
         </div>
