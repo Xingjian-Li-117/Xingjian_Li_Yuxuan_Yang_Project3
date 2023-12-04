@@ -3,7 +3,6 @@ import React, {useState} from 'react';
 import TimelineTweet from './TimelineTweet';
 import axios from 'axios';
 import { useUser } from "../context/UserContext";
-//import TweetContext from '../context/TweetContext';
 
 
 const MainTweet = () => {
