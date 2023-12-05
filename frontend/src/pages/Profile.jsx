@@ -12,6 +12,7 @@ const Profile = () => {
   const [open, setOpen] = useState(false);
   const [userTweets, setUserTweets] = useState(null);
   const [userProfile, setUserProfile] = useState(null);
+  const [profileDescription, setProfileDescription] = useState(null);
   const { currentUser } = useUser();
   const { id } = useParams();
 
@@ -22,6 +23,7 @@ const Profile = () => {
         const userProfile = await axios.get(`/users/find/${id}`);
         setUserTweets(userTweets.data);
         setUserProfile(userProfile.data);
+        setProfileDescription(userProfile.data.description);
       } catch(err) {
         console.log("err", err);
       }
@@ -52,6 +54,11 @@ const Profile = () => {
             )}
             {userProfile && (
               <div className="text-sm text-gray-500">
+                Description: {userProfile.description}
+              </div>
+            )}
+            {userProfile && (
+              <div className="text-sm text-gray-500">
                 Joined: {formatDate(userProfile.createdAt)}
               </div>
             )}
@@ -74,7 +81,9 @@ const Profile = () => {
             <RightSidebar />
         </div>
       </div>
-      {open && <EditProfile setOpen={setOpen} />}
+      {open && <EditProfile setOpen={setOpen}  
+      userId={currentUser._id} 
+      setProfileDescription={setProfileDescription}/>}
     </>
   )
 }

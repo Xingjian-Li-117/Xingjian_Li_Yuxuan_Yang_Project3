@@ -11,10 +11,10 @@ const TimelineTweet = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                if (currentUser) {
-                    const timelineTweets = await axios.get(`/tweets/timeline/${currentUser._id}`);
+                //if (currentUser) {
+                    const timelineTweets = await axios.get(`/tweets/timeline/all`);
                     setTimeline(timelineTweets.data);
-                }
+                //}
             } catch (error) {
                 console.error("Error fetching timeline tweets", error);
             }

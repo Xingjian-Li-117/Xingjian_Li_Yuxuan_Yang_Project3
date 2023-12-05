@@ -59,7 +59,7 @@ router.post('/login', async (req, res, next) => {
     
         const isCorrect = await bcrypt.compare(req.body.password, user.password);
     
-        if (!isCorrect) return next(handleError(400, "Wrong password"));
+        if (!isCorrect) return res.status(404).json({ message: "Wrong password" });
     
         const token = jwt.sign({ id: user._id }, process.env.JWT);
         const { password, ...othersData } = user._doc;
@@ -132,6 +132,26 @@ router.get('/isLoggedIn', async (req, res, next) => {
         }
 });
 
+// update user description
+router.put('/updateDescription/:id', async (req, res) => {
+  const {id} = req.params;
+  const {newDescription} = req.body;
+
+  try {
+    const user = await User.findById(id);
+    if (!user) {
+      return res.status(404).json({message: 'User not found'});
+    }
+
+    user.description = newDescription;
+    await user.save();
+
+    res.status(200).json({message: 'User description updated successfully'});
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({message: 'Internal server error'});
+  }
+});
 
 
 module.exports = router;

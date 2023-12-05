@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
   
   const [registerUsername, setRegisterUsername] = useState("");
   const [registerEmail, setRegisterEmail] = useState("");
@@ -25,6 +26,7 @@ const Login = () => {
       loginSuccess(res.data);
       navigate("/");
     } catch (err) {
+      setError(err.response?.data?.message || "An error occurred");
       loginFailed();
     }
   };
@@ -64,6 +66,7 @@ const Login = () => {
           Log in
         </button>
       </form>
+      {error && <p className="text-red-500">{error}</p>} {/* 显示错误信息 */}
       
       <p className="text-center text-xl">Don't have an account?</p>
       

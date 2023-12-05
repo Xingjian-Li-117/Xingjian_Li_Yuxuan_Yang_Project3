@@ -6,7 +6,7 @@ const UserContext = createContext(null);
 export const useUser = () => useContext(UserContext);
 
 export const UserProvider = ({ children }) => {
-  const [currentUser, setCurrentUser] = useState({});
+  const [currentUser, setCurrentUser] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
 
@@ -39,7 +39,8 @@ export const UserProvider = ({ children }) => {
   };
   const logout = () => {
     setCurrentUser(null);
-    //remove user info after logu
+    //remove user info after logout
+    setError(null);
     localStorage.removeItem('currentUser');
   };
 

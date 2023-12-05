@@ -15,7 +15,7 @@ router.post('/', verifyToken, async (req, res) => {
         const savedTweet = await newTweet.save();
         res.status(200).json(savedTweet);
         } catch (err) {
-            handleError(500, err);
+            res.status(500);
         }
 });
 
@@ -45,20 +45,20 @@ router.put("/:id", verifyToken, async (req, res) => {
   
             res.status(200).json(updatedTweet);
         } else {
-            handleError(403, "User does not have permission to edit this tweet");
+            res.status(402).json({message: "User does not have permission to edit this tweet"});
         }
         } catch (err) {
-            handleError(500, err);
+            res.status(500);
         }
 });
 
 // get all timeline tweets
-router.get('/timeline/:id', async (req, res) => {
+router.get('/timeline/all', async (req, res) => {
     try {
       const allTweets = await Tweet.find().sort({ createdAt: -1 });
       res.status(200).json(allTweets);
     } catch (err) {
-      handleError(500, err);
+      res.status(500);
     }
 });
 
@@ -71,7 +71,7 @@ router.get('/user/all/:id', async (req, res) => {
       });
       res.status(200).json(userTweets);
     } catch (err) {
-      handleError(500, err);
+      res.status(500);
     }
 });
 

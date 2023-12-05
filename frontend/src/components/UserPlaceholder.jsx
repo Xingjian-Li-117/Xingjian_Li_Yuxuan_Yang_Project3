@@ -1,10 +1,10 @@
 import axios from "axios";
-import React, {userState, useEffect } from 'react';
-import { useLocation, useParams } from "react-router-dom";
+import React, {useEffect } from 'react';
+import {useParams } from "react-router-dom";
 
 const UserPlaceholder = ({setUserData, userData}) => {
   const { id } = useParams();
-  const location = useLocation().pathname;
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -16,7 +16,7 @@ const UserPlaceholder = ({setUserData, userData}) => {
       }
     };
     fetchData();
-  }, [id]);
+  }, [id, setUserData]);
 
   return <div>{userData?.username}</div>;
 }
