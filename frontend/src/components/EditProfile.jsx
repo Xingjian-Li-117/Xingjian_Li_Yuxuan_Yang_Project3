@@ -26,15 +26,21 @@ const EditProfile = ({setOpen, userId, setProfileDescription }) => {
                 X
             </button>
             <h2 className="font-bold text-xl">Edit Profile</h2>
-            <p>Choose a new profile picture</p >
             <textarea
-              value={newDescription}
-              onChange={(e) => setNewDescription(e.target.value)}
-              placeholder="Enter new description"
+                value={newDescription}
+                onChange={(e) => setNewDescription(e.target.value)}
+                placeholder="Enter new description"
+                className="rounded-md p-3"
             />
-            <button onClick={handleUpdateProfile}>Update Profile</button>
+            <button 
+                onClick={handleUpdateProfile}
+                className="bg-blue-500 text-white py-2 px-4 rounded-md"
+            >
+                Update Profile
+            </button>
+            
         </div>
-        EditProfile
+        
     </div>
   )
 }

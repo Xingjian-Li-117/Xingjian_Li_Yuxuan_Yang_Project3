@@ -14,8 +14,8 @@ const Login = () => {
   const [registerUsername, setRegisterUsername] = useState("");
   const [registerEmail, setRegisterEmail] = useState("");
   const [registerPassword, setRegisterPassword] = useState("");
-  //
-  const { loginStart, loginSuccess, loginFailed, register } = useUser();
+  
+  const { loginStart, loginSuccess, loginFailed } = useUser();
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
@@ -34,10 +34,22 @@ const Login = () => {
   const handleRegister = async (e) => {
     e.preventDefault();
     loginStart();
+    //check empty
+    if (!registerUsername || !registerEmail || !registerPassword) {
+      setError("Please fill in all fields");
+      loginFailed();
+      return;
+    }
     try {
-      await register(registerUsername, registerEmail, registerPassword); // 使用register函数
+      const res = await axios.post("/users/register", {
+        username: registerUsername,
+        email: registerEmail,
+        password: registerPassword
+      });
+      loginSuccess(res.data); 
       navigate("/");
     } catch (err) {
+      setError(err.response?.data?.message || "An error occurred");
       loginFailed();
     }
   };
@@ -66,7 +78,7 @@ const Login = () => {
           Log in
         </button>
       </form>
-      {error && <p className="text-red-500">{error}</p>} {/* 显示错误信息 */}
+      {error && <p className="text-red-500">{error}</p>} 
       
       <p className="text-center text-xl">Don't have an account?</p>
       

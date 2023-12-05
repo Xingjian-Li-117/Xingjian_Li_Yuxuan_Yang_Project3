@@ -24,8 +24,11 @@ router.get('/find/:id',async (req, res, next) => {
 
 //register
 router.post('/register', async (req, res, next) => {
-    console.log("Signup request received", req.body);
-
+  const existingUser = await User.findOne({ username: req.body.username });
+  if (existingUser) {
+      return res.status(400).json({ message: "Username already exists" });
+  }
+  
     try {
         const salt = bcrypt.genSaltSync(10);
         const hash = bcrypt.hashSync(req.body.password, salt);

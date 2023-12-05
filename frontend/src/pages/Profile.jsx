@@ -2,7 +2,7 @@ import React, { useState, useEffect }from 'react';
 import LeftSideBar from '../components/LeftSidebar';
 import RightSidebar from '../components/RightSidebar';
 import { useUser } from "../context/UserContext";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
 import axios from 'axios';
 import Tweet from "../components/Tweet";
@@ -15,8 +15,14 @@ const Profile = () => {
   const [profileDescription, setProfileDescription] = useState(null);
   const { currentUser } = useUser();
   const { id } = useParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
+    if (!currentUser) {
+      navigate("/");
+      return;
+    }
+    
     const fetchData = async () => {
       try {
         const userTweets = await axios.get(`/tweets/user/all/${id}`);
@@ -30,7 +36,7 @@ const Profile = () => {
     };
 
     fetchData();
-  }, [currentUser, id]);
+  }, [currentUser, id, navigate]);
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
@@ -54,7 +60,7 @@ const Profile = () => {
             )}
             {userProfile && (
               <div className="text-sm text-gray-500">
-                Description: {userProfile.description}
+                Description: {profileDescription}
               </div>
             )}
             {userProfile && (
@@ -63,8 +69,8 @@ const Profile = () => {
               </div>
             )}
 
-
           </div>
+          <hr className="mt-10 border-t border-gray-200" />
           <div className="mt-6">
               {userTweets &&
                 userTweets.map((tweet) => {
@@ -83,7 +89,8 @@ const Profile = () => {
       </div>
       {open && <EditProfile setOpen={setOpen}  
       userId={currentUser._id} 
-      setProfileDescription={setProfileDescription}/>}
+      setProfileDescription={setProfileDescription}
+      />}
     </>
   )
 }
