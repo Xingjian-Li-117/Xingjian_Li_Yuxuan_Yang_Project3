@@ -5,7 +5,7 @@ import axios from 'axios';
 import { useUser } from "../context/UserContext";
 
 
-const MainTweet = () => {
+const MainTweet = ({showTimeline = true}) => {
   const { currentUser } = useUser();
   const [tweetText, setTweetText] = useState("");
   
@@ -13,11 +13,13 @@ const MainTweet = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-        await axios.post("/tweets", {
+      await axios.post("/tweets", {
           userId: currentUser._id,
           description: tweetText,
       });
+      setTweetText("");
       window.location.reload(false);
+      
     } catch (err) {
       console.log(err);
     }
@@ -45,7 +47,8 @@ const MainTweet = () => {
           Tweet
         </button>
       </form>
-      <TimelineTweet />
+      {showTimeline && <TimelineTweet />}
+      {/*<TimelineTweet />*/}
     </div>
   );
 }

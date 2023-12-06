@@ -1,6 +1,7 @@
 import React, { useState, useEffect }from 'react';
 import LeftSideBar from '../components/LeftSidebar';
 import RightSidebar from '../components/RightSidebar';
+import MainTweet from '../components/MainTweet';
 import { useUser } from "../context/UserContext";
 import { useParams, useNavigate } from "react-router-dom";
 
@@ -45,6 +46,7 @@ const Profile = () => {
     return date.toLocaleDateString("en-US", { year: 'numeric', month: 'long', day: 'numeric' });
   };
 
+
   return (
     <>
       <div className="grid grid-cols-1 md:grid-cols-4">
@@ -72,7 +74,13 @@ const Profile = () => {
               </button>
             )}
           </div>
+
           <hr className="mt-2 border-t border-gray-200" />
+
+          {currentUser && currentUser._id === id && (
+            <MainTweet showTimeline={false} /> 
+          )}
+
           <div className="mt-6">
             {userTweets &&
               userTweets.map((tweet) => (
