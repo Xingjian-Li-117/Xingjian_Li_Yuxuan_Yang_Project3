@@ -14,8 +14,8 @@ const MainTweet = () => {
     e.preventDefault();
     try {
         await axios.post("/tweets", {
-        userId: currentUser._id,
-        description: tweetText,
+          userId: currentUser._id,
+          description: tweetText,
       });
       window.location.reload(false);
     } catch (err) {
