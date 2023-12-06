@@ -23,7 +23,6 @@ const TimelineTweet = () => {
         fetchData();
     }, [currentUser]);
 
-    console.log("Timeline", timeline);
 
     return (
         <div className="mt-6">
@@ -34,7 +33,6 @@ const TimelineTweet = () => {
                     </div>
                 );
             })}
-
         </div>
     );
 }

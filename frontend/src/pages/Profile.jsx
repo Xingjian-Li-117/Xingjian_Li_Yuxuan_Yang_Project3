@@ -19,13 +19,6 @@ const Profile = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    /*
-    if (!currentUser) {
-      navigate("/");
-      return;
-    }
-    */
-    
     const fetchData = async () => {
       try {
         const userTweets = await axios.get(`/tweets/user/all/${id}`);
@@ -107,6 +100,8 @@ const Profile = () => {
 }
 
 export default Profile
+
+
 
 
 

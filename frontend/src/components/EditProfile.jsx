@@ -34,7 +34,7 @@ const EditProfile = ({setOpen, userId, setProfileDescription }) => {
             />
             <button 
                 onClick={handleUpdateProfile}
-                className="bg-blue-500 text-white py-2 px-4 rounded-md"
+              className="bg-blue-500 text-white py-2 px-4 rounded-md"
             >
                 Update Profile
             </button>
