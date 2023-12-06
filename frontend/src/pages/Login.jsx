@@ -54,8 +54,6 @@ const Login = () => {
     }
   };
 
-
-
   return (
     <div className="bg-gray-200 py-12 px-8 rounded-lg w-8/12 md:w-6/12 mx-auto">
       <form className="flex flex-col gap-4 mb-10">

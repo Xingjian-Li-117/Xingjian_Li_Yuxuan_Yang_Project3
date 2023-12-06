@@ -20,10 +20,12 @@ router.post('/', verifyToken, async (req, res) => {
 });
 
 //delete tweet
-router.post("/:id", verifyToken, async (req, res) => {
+// router.post("/:id", verifyToken, async (req, res) => {
+router.delete("/:id", verifyToken, async (req, res) => {
     try {
         const tweet = await Tweet.findById(req.params.id);
-        if(tweet.userId === req.body.id) {
+        // if(tweet.userId === req.body.id) {
+        if(tweet.userId === req.user.id) {
             await tweet.deleteOne();
             res.status(200).json("Tweet has been deleted");
         } else {
@@ -39,7 +41,8 @@ router.put("/:id", verifyToken, async (req, res) => {
     try {
         const tweet = await Tweet.findById(req.params.id);
   
-        if (tweet.userId === req.body.id) {
+        // if (tweet.userId === req.body.id) {
+        if (tweet.userId === req.user.id) {
             tweet.description = req.body.description;
             const updatedTweet = await tweet.save();
   

@@ -10,7 +10,7 @@ const Navbar = () => {
   const [userData, setUserData] = useState(null);
   const location = useLocation().pathname;
   return (
-    <div className="grid grid-cols-1 md:grid-cols-4 my-5 justify-center">
+    <div className="fixed top-0 md:w-9/12 z-10 grid grid-cols-1 md:grid-cols-4 py-5 justify-center bg-white">
       <div className="mx-auto md:mx-0">
         <img
           src="/logo.jpg"

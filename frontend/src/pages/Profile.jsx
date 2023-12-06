@@ -18,10 +18,12 @@ const Profile = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    /*
     if (!currentUser) {
       navigate("/");
       return;
     }
+    */
     
     const fetchData = async () => {
       try {
@@ -47,52 +49,58 @@ const Profile = () => {
     <>
       <div className="grid grid-cols-1 md:grid-cols-4">
         <div className="px-6">
-            <LeftSideBar />
+          <LeftSideBar />
         </div>
         <div className="col-span-2 border-x-2 border-t-slate-800 px-6">
+          {userProfile && (
+            <div className="text-sm text-gray-500 mb-2">
+              Joined: {formatDate(userProfile.createdAt)}
+            </div>
+          )}
+          {userProfile && (
+            <div className="text-md text-black-500 mb-4">
+              Description: {profileDescription}
+            </div>
+          )}
           <div className="flex justify-between items-center">
-          {currentUser && currentUser._id === id && (
-              <button className="px-4 -y-2 bg-blue-500 rounded-full text-white"
-              onClick={() => setOpen(true)}
+            {currentUser && currentUser._id === id && (
+              <button
+                className="px-4 -y-2 bg-blue-500 rounded-full text-white mb-2"
+                onClick={() => setOpen(true)}
               >
                 Edit Profile
               </button>
             )}
-            {userProfile && (
-              <div className="text-sm text-gray-500">
-                Description: {profileDescription}
-              </div>
-            )}
-            {userProfile && (
-              <div className="text-sm text-gray-500">
-                Joined: {formatDate(userProfile.createdAt)}
-              </div>
-            )}
-
           </div>
-          <hr className="mt-10 border-t border-gray-200" />
+          <hr className="mt-2 border-t border-gray-200" />
           <div className="mt-6">
-              {userTweets &&
-                userTweets.map((tweet) => {
-                  return (
-                    <div className="p-2" key={tweet._id}>
-                      <Tweet tweet={tweet} setData={setUserTweets} />
-                    </div>
-                  );
-                })}
-            </div>
+            {userTweets &&
+              userTweets.map((tweet) => (
+                <div className="p-2" key={tweet._id}>
+                  <Tweet tweet={tweet} setData={setUserTweets} />
+                </div>
+              ))}
+          </div>
         </div>
-
+  
         <div className="px-6">
-            <RightSidebar />
+          <RightSidebar />
         </div>
       </div>
-      {open && <EditProfile setOpen={setOpen}  
-      userId={currentUser._id} 
-      setProfileDescription={setProfileDescription}
-      />}
+      {open && (
+        <EditProfile
+          setOpen={setOpen}
+          userId={currentUser._id}
+          setProfileDescription={setProfileDescription}
+        />
+      )}
     </>
   )
 }
 
 export default Profile
+
+
+
+
+
