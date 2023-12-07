@@ -22,7 +22,7 @@ const Login = () => {
     e.preventDefault();
     loginStart();
     try {
-      const res = await axios.post("/users/login", { username, password });
+      const res = await axios.post("/api/users/login", { username, password });
       loginSuccess(res.data);
       navigate("/");
     } catch (err) {
@@ -41,7 +41,7 @@ const Login = () => {
       return;
     }
     try {
-      const res = await axios.post("/users/register", {
+      const res = await axios.post("/api/users/register", {
         username: registerUsername,
         email: registerEmail,
         password: registerPassword

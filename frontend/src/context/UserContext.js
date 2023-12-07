@@ -47,7 +47,7 @@ export const UserProvider = ({ children }) => {
   const register = async (username, email, password) => {
     loginStart();
     try {
-      const res = await axios.post("/users/register", { username, email, password });
+      const res = await axios.post("/api/users/register", { username, email, password });
       loginSuccess(res.data);
     } catch (err) {
         loginFailed(err.response.data.message || "An error occurred");;

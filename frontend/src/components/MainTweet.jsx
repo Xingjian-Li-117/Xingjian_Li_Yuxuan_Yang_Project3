@@ -14,7 +14,7 @@ const MainTweet = ({showTimeline = true}) => {
     e.preventDefault();
     if (!currentUser) return;
     try {
-      await axios.post("/tweets", {
+      await axios.post("/api/tweets", {
           userId: currentUser._id,
           description: tweetText,
       });

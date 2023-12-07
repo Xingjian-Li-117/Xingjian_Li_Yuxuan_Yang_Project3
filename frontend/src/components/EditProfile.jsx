@@ -6,7 +6,7 @@ const EditProfile = ({setOpen, userId, setProfileDescription }) => {
 
   const handleUpdateProfile = async () => {
     try {
-      await axios.put(`/users/updateDescription/${userId}`, { newDescription });
+      await axios.put(`/api/users/updateDescription/${userId}`, { newDescription });
       
       setProfileDescription(newDescription);
 

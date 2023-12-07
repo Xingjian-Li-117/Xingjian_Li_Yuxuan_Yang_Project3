@@ -21,8 +21,8 @@ const Profile = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const userTweets = await axios.get(`/tweets/user/all/${id}`);
-        const userProfile = await axios.get(`/users/find/${id}`);
+        const userTweets = await axios.get(`/api/tweets/user/all/${id}`);
+        const userProfile = await axios.get(`/api/users/find/${id}`);
         setUserTweets(userTweets.data);
         setUserProfile(userProfile.data);
         setProfileDescription(userProfile.data.description);

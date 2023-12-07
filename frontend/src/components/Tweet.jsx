@@ -30,7 +30,7 @@ const Tweet = ({ tweet }) => {
 
   const handleDelete = async () => {
     try {
-      await axios.delete(`/tweets/${tweet._id}`);
+      await axios.delete(`/api/tweets/${tweet._id}`);
       // onDelete(tweet._id); // Notify parent component to remove the tweet from the state
       window.location.reload(false);
       console.log("tweet deleted!");
@@ -52,7 +52,7 @@ const Tweet = ({ tweet }) => {
       };
       toggleEditMode();
 
-      await axios.put(`/tweets/${tweet._id}`, updateData);
+      await axios.put(`/api/tweets/${tweet._id}`, updateData);
       // onDelete(tweet._id); // Notify parent component to remove the tweet from the state
       window.location.reload(false);
       console.log("tweet updated!");
