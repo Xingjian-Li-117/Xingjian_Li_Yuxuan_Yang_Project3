@@ -16,7 +16,7 @@ const Tweet = ({ tweet }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const findUser = await axios.get(`/users/find/${tweet.userId}`);
+        const findUser = await axios.get(`/api/users/find/${tweet.userId}`);
         setUserData(findUser.data);
         setUpdatedDescription(tweet.description); 
       } catch (err) {
