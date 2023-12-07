@@ -31,7 +31,7 @@ const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'Error connecting to MongoDB:'));
 
 // new
-let frontend_dir = path.join(__dirname, '..', 'frontend', 'dist')
+let frontend_dir = path.join(__dirname, '..', 'frontend', 'build')
 
 app.use(express.static(frontend_dir));
 app.get('*', function (req, res) {
